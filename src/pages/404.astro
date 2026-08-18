@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site } from "../data/site";
+---
+
+<Layout title={`页面未找到 - ${site.name}`}>
+  <div class="notfound">
+    <h1>404</h1>
+    <p>抱歉，您访问的页面不存在或已调整。</p>
+    <a class="btn btn-primary" href="/">返回首页</a>
+  </div>
+</Layout>

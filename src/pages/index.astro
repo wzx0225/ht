@@ -1,0 +1,154 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { site, overview, company, buildingParams, location, certifications } from "../data/site";
+
+const maxAsset = Math.max(...company.assetTrend.map((d) => d.value));
+---
+
+<Layout title={`${site.name} - ${site.positioning}`} description={site.description}>
+  <!-- 主视觉 -->
+  <section class="hero">
+    <img class="hero-bg" src={overview.heroImage} alt={overview.heroImageAlt} />
+    <div class="container hero-content">
+      <p class="slogan">{site.slogan}</p>
+      <h1>{site.name}</h1>
+      <p class="desc">{site.positioning}｜建筑高度172.5米，2026年8月竣工交付</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/floors/">查看楼层</a>
+        <a class="btn btn-outline" href="/tenants/">意向客户</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目概况 -->
+  <section class="section" id="overview">
+    <div class="container">
+      <div class="section-head">
+        <h2>项目概况</h2>
+        <p>济南东部新地标，硬件标准最优、运营配置最佳的超甲级写字楼</p>
+      </div>
+      <div class="grid grid-2" style="align-items: center;">
+        <div>
+          {overview.intro.map((p) => <p style="color: var(--text-secondary); margin-bottom: 14px;">{p}</p>)}
+          <div class="grid grid-2" style="margin-top: 20px;">
+            {overview.highlights.map((h) => (
+              <div class="card">
+                <h3 style="color: var(--primary);">{h.title}</h3>
+                <p>{h.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <img src={overview.heroImage} alt={overview.heroImageAlt} style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 建筑参数 -->
+  <section class="section section-alt" id="params">
+    <div class="container">
+      <div class="section-head">
+        <h2>建筑参数</h2>
+        <p>13.8亿元总投资，地上33层、地下5层，172.5米城市高度</p>
+      </div>
+      <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+        {buildingParams.map((p) => (
+          <div class="stat">
+            <div class="value" style="font-size: 1.25rem;">{p.value}</div>
+            <div class="label">{p.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 公司介绍 -->
+  <section class="section" id="company">
+    <div class="container">
+      <div class="section-head">
+        <h2>开发建设方</h2>
+        <p>{company.name}｜成立于{company.founded}｜注册资本{company.registeredCapital}</p>
+      </div>
+      <div class="grid grid-2" style="align-items: start;">
+        <div>
+          <p style="color: var(--text-secondary); margin-bottom: 20px;">{company.intro}</p>
+          <div class="stat-grid" style="grid-template-columns: repeat(2, 1fr);">
+            {company.stats.map((s) => (
+              <div class="stat">
+                <div class="value">{s.value}</div>
+                <div class="label">{s.label}</div>
+                {s.note && <div class="note">{s.note}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="card">
+          <h3>租赁业务余额增长趋势（亿元）</h3>
+          <div class="chart" role="img" aria-label="汇通金租租赁业务余额增长柱状图">
+            {company.assetTrend.map((d) => (
+              <div class="bar-col">
+                <div class="bar" data-value={d.value} style={`height: ${Math.round((d.value / maxAsset) * 100)}%`}></div>
+              </div>
+            ))}
+          </div>
+          <div class="chart-labels">
+            {company.assetTrend.map((d) => <span>{d.year}</span>)}
+          </div>
+          <h3 style="margin-top: 26px;">股东构成</h3>
+          <ul>
+            {company.shareholders.map((s) => (
+              <li style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed var(--border); color: var(--text-secondary);">
+                <span>{s.name}</span><span style="font-weight:600; color: var(--primary);">{s.ratio}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 区位交通 -->
+  <section class="section section-alt" id="location">
+    <div class="container">
+      <div class="section-head">
+        <h2>区位交通</h2>
+        <p>立体交通覆盖，商务配套齐全，生态办公独优</p>
+      </div>
+      <div class="grid grid-2" style="align-items: stretch;">
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <img src={location.mapImage} alt={location.mapImageAlt} style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+        <div class="grid" style="gap: 16px;">
+          {location.points.map((p) => (
+            <div class="card">
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 品质认证 -->
+  <section class="section" id="certification">
+    <div class="container">
+      <div class="section-head">
+        <h2>品质认证</h2>
+        <p>按绿建三星、LEED铂金、鲁班奖标准建设</p>
+      </div>
+      <div class="grid grid-3">
+        {certifications.map((c) => (
+          <div class="card" style="text-align:center;">
+            <h3 style="color: var(--primary); font-size:1.3rem;">{c.award}</h3>
+            <p style="margin: 8px 0;">{c.level}</p>
+            <p style="color: var(--accent); font-weight:600;">{c.status}</p>
+            <p style="margin-top: 6px; font-size: 0.85rem;">{c.timeline}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

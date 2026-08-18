@@ -1,0 +1,119 @@
+---
+import "../styles/global.css";
+import { site, navigation } from "../data/site";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="汇通金融大厦,济南写字楼,超甲级写字楼,办公楼出租,济南东部地标" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          <img src="/images/logo.jpeg" alt="汇通金融租赁标志" />
+          <span>{site.name}</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="打开菜单">☰</button>
+        <nav class="main-nav" id="mainNav" aria-label="主导航">
+          <ul>
+            {navigation.map((item) => (
+              <li>
+                <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <button class="theme-toggle" id="themeToggle">深色模式</button>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h4>{site.fullName}</h4>
+            <p>{site.description}</p>
+            <p style="margin-top: 10px;">{site.slogan}</p>
+          </div>
+          <div>
+            <h4>快速导航</h4>
+            <ul>
+              {navigation.map((item) => (
+                <li><a href={item.href}>{item.label}</a></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4>联系招商</h4>
+            <ul>
+              <li>电话：{site.contact.phone}</li>
+              <li>地址：{site.contact.address}</li>
+              <li>邮箱：{site.contact.email}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          资料更新于 {site.updatedAt} · {site.name} 招商中心
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      // 深色模式切换
+      (function () {
+        var btn = document.getElementById("themeToggle");
+        function label() {
+          var dark = document.documentElement.getAttribute("data-theme") === "dark";
+          btn.textContent = dark ? "浅色模式" : "深色模式";
+        }
+        btn.addEventListener("click", function () {
+          var root = document.documentElement;
+          var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          label();
+        });
+        label();
+      })();
+      // 移动端菜单
+      (function () {
+        var toggle = document.getElementById("navToggle");
+        var nav = document.getElementById("mainNav");
+        toggle.addEventListener("click", function () {
+          nav.classList.toggle("open");
+        });
+      })();
+    </script>
+  </body>
+</html>

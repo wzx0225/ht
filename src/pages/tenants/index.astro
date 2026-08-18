@@ -1,0 +1,51 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+import { site, tenants } from "../../data/site";
+
+const entry = await getEntry("pages", "tenant-intro");
+const { Content } = await render(entry);
+---
+
+<Layout title={`意向客户 - ${site.name}`} description="汇通金融大厦招商进展：预计入驻350人，自用楼层27-32层，出租意向客户3个。">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>意向客户</h2>
+        <p>{tenants.intro}</p>
+      </div>
+
+      <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+        {tenants.summary.map((s) => (
+          <div class="stat">
+            <div class="value" style="font-size: 1.3rem;">{s.value}</div>
+            <div class="label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="markdown" style="margin-top: 36px;">
+        <Content />
+      </div>
+
+      <h3 style="margin: 30px 0 16px; font-size: 1.2rem;">入驻明细</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>入驻类型</th><th>公司名称</th><th>客户行业</th><th>楼层</th><th>使用面积</th><th>办公人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tenants.list.map((t) => (
+              <tr>
+                <td>{t.type}</td><td>{t.name}</td><td>{t.industry}</td><td>{t.floor}</td><td>{t.area}</td><td>{t.people}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top: 14px; color: var(--text-secondary); font-size: 0.88rem;">{tenants.note}</p>
+    </div>
+  </section>
+</Layout>

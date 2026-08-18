@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+import { site, propertyServices } from "../../data/site";
+
+const entry = await getEntry("pages", "service-intro");
+const { Content } = await render(entry);
+---
+
+<Layout title={`物业服务 - ${site.name}`} description="汇通金融大厦物业服务：头部物业公司全链条服务，24小时安全值守，六大板块增值服务。">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>物业服务</h2>
+        <p>{propertyServices.intro}</p>
+      </div>
+
+      <div class="markdown">
+        <Content />
+      </div>
+
+      <h3 style="margin: 36px 0 18px; font-size: 1.2rem;">基础服务</h3>
+      <div class="grid grid-3">
+        {propertyServices.basic.map((s) => (
+          <div class="card">
+            <h3>{s.category}</h3>
+            <ul>{s.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+
+      <h3 style="margin: 36px 0 18px; font-size: 1.2rem;">增值服务（按需采购）</h3>
+      <div class="grid grid-3">
+        {propertyServices.valueAdded.map((s) => (
+          <div class="card">
+            <h3>{s.category}</h3>
+            <ul>
+              {s.items.map((i) => (
+                <li>
+                  <strong style="color: var(--text);">{i.name}</strong>：{i.desc}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="card" style="margin-top: 36px; padding: 0; overflow: hidden;">
+        <img src={propertyServices.serviceImage} alt={propertyServices.serviceImageAlt} style="width: 100%; max-height: 420px; object-fit: cover;" />
+      </div>
+    </div>
+  </section>
+</Layout>
