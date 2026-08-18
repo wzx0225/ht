@@ -1,49 +1,36 @@
-name: Deploy to GitHub Pages
+nname: Deploy to GitHub Pages
 
 on:
-  # 推送到 main 分支时自动部署
+  # 当推送到 main 分支时触发部署
   push:
     branches: [main]
-  # 允许手动触发
+  # 允许你在 Actions 页面手动触发部署
   workflow_dispatch:
 
-# 设置 GitHub Pages 所需权限
+# 设置 GITHUB_TOKEN 的权限，允许写入 GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 同一时间只运行一个部署
+# 确保同一时间只有一个部署任务在运行
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout your repository using git
         uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      
+      - name: Install, build, and upload your site output
+        uses: withastro/action@v3
         with:
-          node-version: 22
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build with Astro
-        run: npm run build
-        env:
-          # 自动设置子路径，例如仓库名为 huitong-tower，则 base 为 /huitong-tower/
-          ASTRO_BASE: /${{ github.event.repository.name }}/
-          SITE_URL: https://${{ github.repository_owner }}.github.io
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
+          path: . # 项目的根目录
+          node-version: 20 # 指定 Node.js 版本，推荐 18 或 20
+          package-manager: npm@latest # 如果你用的是 npm，请改为 npm；如果是 yarn，改为 yarn
 
   deploy:
     needs: build
