@@ -29,7 +29,7 @@ jobs:
         uses: withastro/action@v3
         with:
           path: . # 项目的根目录
-          node-version: 20 # 指定 Node.js 版本，推荐 18 或 20
+          node-version: 22 # 指定 Node.js 版本，推荐 18 或 20
           package-manager: npm@latest # 如果你用的是 npm，请改为 npm；如果是 yarn，改为 yarn
 
   deploy:
