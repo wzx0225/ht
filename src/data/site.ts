@@ -298,9 +298,9 @@ export const tenants = {
 
 // ---------- 导航 ----------
 export const navigation = [
-  { label: "首页", href: "/" },
-  { label: "楼层介绍", href: "/floors/" },
-  { label: "物业服务", href: "/services/" },
-  { label: "业态规划", href: "/formats/" },
-  { label: "意向客户", href: "/tenants/" },
+  { label: "首页", href: "/ht/" },
+  { label: "楼层介绍", href: "/ht/floors/" },
+  { label: "物业服务", href: "/ht/services/" },
+  { label: "业态规划", href: "/ht/formats/" },
+  { label: "意向客户", href: "/ht/tenants/" },
 ];
