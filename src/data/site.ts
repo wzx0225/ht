@@ -1,9 +1,7 @@
 // ============================================================
 // 汇通金融大厦网站 —— 项目资料集中配置文件
-// 修改网站内容时，只需要编辑这一个文件，然后重新发布即可。
-// 图片放在 public/images/ 目录下，使用 import.meta.env.BASE_URL动态拼接路径，适配Github Pages子路径
+// Github Pages部署子路径 /ht，图片路径硬编码前缀 /ht
 // ============================================================
-const BASE = import.meta.env.BASE_URL;
 
 export const site = {
   name: "汇通金融大厦",
@@ -13,16 +11,16 @@ export const site = {
   description:
     "汇通金融大厦由山东汇通金融租赁有限公司匠心建设、自有资金打造、独家运营，项目总投入13.8亿元，打造济南硬件标准最优、运营配置最佳的超甲级写字楼。",
   contact: {
-    phone: "0531-85105859", // TODO: 替换为真实招商电话
-    address: "济南市历下区经十东路与凤凰路交汇处", // TODO: 核对准确地址
-    email: "zhaoshang@example.com", // TODO: 替换为真实招商邮箱
+    phone: "0531-85105859",
+    address: "济南市历下区经十东路与凤凰路交汇处",
+    email: "zhaoshang@example.com",
   },
   updatedAt: "2026年8月",
 };
 
 // ---------- 首页：项目概况 ----------
 export const overview = {
-  heroImage: `${BASE}images/hero.jpeg`,
+  heroImage: "/ht/images/hero.jpeg",
   heroImageAlt: "汇通金融大厦外观效果图",
   intro: [
     "汇通金融大厦将于2026年8月底正式竣工交付，由山东汇通金融租赁有限公司匠心建设、自有资金打造、独家运营，项目总投入13.8亿元。",
@@ -39,7 +37,7 @@ export const overview = {
 // ---------- 首页：公司介绍 ----------
 export const company = {
   name: "山东汇通金融租赁有限公司",
-  logo: `${BASE}images/logo.jpeg`,
+  logo: "/ht/images/logo.jpeg",
   founded: "2015年12月",
   registeredCapital: "25亿元",
   intro:
@@ -58,7 +56,6 @@ export const company = {
     { label: "复合增长率", value: "约30%", note: "2016‑2025年" },
     { label: "不良率", value: "0%", note: "成立以来持续保持" },
   ],
-  // 租赁业务余额（亿元）
   assetTrend: [
     { year: "2016", value: 39 },
     { year: "2017", value: 106 },
@@ -88,7 +85,7 @@ export const buildingParams = [
 
 // ---------- 首页：区位交通 ----------
 export const location = {
-  mapImage: `${BASE}images/location.jpeg`,
+  mapImage: "/ht/images/location.jpeg",
   mapImageAlt: "汇通金融大厦区位交通示意图",
   points: [
     {
@@ -178,7 +175,7 @@ export const floors = {
       features: ["商务服务、健身康体等配套业态", "与办公动线独立互不干扰"],
     },
   ],
-  lobbyImage: `${BASE}images/lobby.jpeg`,
+  lobbyImage: "/ht/images/lobby.jpeg",
   lobbyImageAlt: "汇通金融大厦大堂效果图",
   note: "具体楼层划分与面积以招商中心最终公布为准。",
 };
@@ -187,7 +184,7 @@ export const floors = {
 export const propertyServices = {
   intro:
     "项目聘请国内头部物业公司，提供全链条标准化物业基础服务，实现24小时安全值守、全域环境管护；配套品质餐厅、共享会议室、专属前台接待，一站式解决餐饮、会务、接待需求。",
-  serviceImage: `${BASE}images/service.jpeg`,
+  serviceImage: "/ht/images/service.jpeg",
   serviceImageAlt: "物业服务场景示意",
   basic: [
     {
