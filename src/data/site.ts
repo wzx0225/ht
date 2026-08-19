@@ -1,8 +1,9 @@
 // ============================================================
 // 汇通金融大厦网站 —— 项目资料集中配置文件
 // 修改网站内容时，只需要编辑这一个文件，然后重新发布即可。
-// 图片放在 public/images/ 目录下，用 "/images/文件名" 引用。
+// 图片放在 public/images/ 目录下，使用 import.meta.env.BASE_URL动态拼接路径，适配Github Pages子路径
 // ============================================================
+const BASE = import.meta.env.BASE_URL;
 
 export const site = {
   name: "汇通金融大厦",
@@ -12,7 +13,7 @@ export const site = {
   description:
     "汇通金融大厦由山东汇通金融租赁有限公司匠心建设、自有资金打造、独家运营，项目总投入13.8亿元，打造济南硬件标准最优、运营配置最佳的超甲级写字楼。",
   contact: {
-    phone: "0531-XXXX-XXXX", // TODO: 替换为真实招商电话
+    phone: "0531-85105859", // TODO: 替换为真实招商电话
     address: "济南市历下区经十东路与凤凰路交汇处", // TODO: 核对准确地址
     email: "zhaoshang@example.com", // TODO: 替换为真实招商邮箱
   },
@@ -21,7 +22,7 @@ export const site = {
 
 // ---------- 首页：项目概况 ----------
 export const overview = {
-  heroImage: "/images/hero.jpeg",
+  heroImage: `${BASE}images/hero.jpeg`,
   heroImageAlt: "汇通金融大厦外观效果图",
   intro: [
     "汇通金融大厦将于2026年8月底正式竣工交付，由山东汇通金融租赁有限公司匠心建设、自有资金打造、独家运营，项目总投入13.8亿元。",
@@ -38,7 +39,7 @@ export const overview = {
 // ---------- 首页：公司介绍 ----------
 export const company = {
   name: "山东汇通金融租赁有限公司",
-  logo: "/images/logo.jpeg",
+  logo: `${BASE}images/logo.jpeg`,
   founded: "2015年12月",
   registeredCapital: "25亿元",
   intro:
@@ -54,7 +55,7 @@ export const company = {
     { label: "资产规模", value: "528亿元", note: "2026年6月末租赁业务余额" },
     { label: "2026年预计总资产", value: "575亿元" },
     { label: "2026年预计利润总额", value: "12.5亿元" },
-    { label: "复合增长率", value: "约30%", note: "2016-2025年" },
+    { label: "复合增长率", value: "约30%", note: "2016‑2025年" },
     { label: "不良率", value: "0%", note: "成立以来持续保持" },
   ],
   // 租赁业务余额（亿元）
@@ -87,7 +88,7 @@ export const buildingParams = [
 
 // ---------- 首页：区位交通 ----------
 export const location = {
-  mapImage: "/images/location.jpeg",
+  mapImage: `${BASE}images/location.jpeg`,
   mapImageAlt: "汇通金融大厦区位交通示意图",
   points: [
     {
@@ -130,11 +131,11 @@ export const certifications = [
 // ---------- 楼层介绍 ----------
 export const floors = {
   intro:
-    "汇通金融大厦地上33层、地下5层。办公用地按高度分为低区、中区、高区三个区段，商业用地位于裙楼1-3层，满足办公与商业配套双重需求。",
+    "汇通金融大厦地上33层、地下5层。办公用地按高度分为低区、中区、高区三个区段，商业用地位于裙楼1‑3层，满足办公与商业配套双重需求。",
   officeZones: [
     {
       name: "低区办公",
-      range: "约4F-13F",
+      range: "约4F‑13F",
       features: [
         "出入便捷，适合高频接待型企业",
         "视野开阔，近观城市绿地景观",
@@ -143,7 +144,7 @@ export const floors = {
     },
     {
       name: "中区办公",
-      range: "约14F-22F",
+      range: "约14F‑22F",
       features: [
         "高度适中，采光与视野均衡",
         "已入驻海铂能源（15F）、海冠电气（21F）等意向客户",
@@ -152,10 +153,10 @@ export const floors = {
     },
     {
       name: "高区办公",
-      range: "约23F-33F",
+      range: "约23F‑33F",
       features: [
         "172.5米高空视野，俯瞰济南东部城区",
-        "27-32F为业主自用楼层，彰显总部形象",
+        "27‑32F为业主自用楼层，彰显总部形象",
         "适合企业总部、金融机构入驻",
       ],
     },
@@ -177,7 +178,7 @@ export const floors = {
       features: ["商务服务、健身康体等配套业态", "与办公动线独立互不干扰"],
     },
   ],
-  lobbyImage: "/images/lobby.jpeg",
+  lobbyImage: `${BASE}images/lobby.jpeg`,
   lobbyImageAlt: "汇通金融大厦大堂效果图",
   note: "具体楼层划分与面积以招商中心最终公布为准。",
 };
@@ -186,7 +187,7 @@ export const floors = {
 export const propertyServices = {
   intro:
     "项目聘请国内头部物业公司，提供全链条标准化物业基础服务，实现24小时安全值守、全域环境管护；配套品质餐厅、共享会议室、专属前台接待，一站式解决餐饮、会务、接待需求。",
-  serviceImage: "/images/service.jpeg",
+  serviceImage: `${BASE}images/service.jpeg`,
   serviceImageAlt: "物业服务场景示意",
   basic: [
     {
@@ -282,15 +283,15 @@ export const businessFormats = {
 // ---------- 意向客户 ----------
 export const tenants = {
   intro:
-    "汇通金融大厦办公主楼预计入驻人数350人，合计使用面积约29012㎡。其中自用楼层27-32层，预计办公人数180人；出租楼层意向客户3个，预计办公人数170人。",
+    "汇通金融大厦办公主楼预计入驻人数350人，合计使用面积约29012㎡。其中自用楼层27‑32层，预计办公人数180人；出租楼层意向客户3个，预计办公人数170人。",
   summary: [
     { label: "预计入驻人数", value: "350人" },
     { label: "合计使用面积", value: "29012㎡" },
-    { label: "自用楼层", value: "27-32F / 180人" },
+    { label: "自用楼层", value: "27‑32F / 180人" },
     { label: "出租意向客户", value: "3个 / 170人" },
   ],
   list: [
-    { type: "自用楼层", name: "汇通金租", industry: "金融", floor: "27-32F", area: "16339㎡", people: "180人" },
+    { type: "自用楼层", name: "汇通金租", industry: "金融", floor: "27‑32F", area: "16339㎡", people: "180人" },
     { type: "出租楼层", name: "海冠电气", industry: "科技", floor: "21F", area: "2886㎡", people: "100人" },
     { type: "出租楼层", name: "海铂能源", industry: "科技", floor: "15F", area: "2787㎡", people: "40人" },
     { type: "出租楼层", name: "骏鲁投资", industry: "金融", floor: "13F", area: "700㎡", people: "30人" },
