@@ -19,7 +19,7 @@ const currentPath = Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href="/ht/favicon.svg" />
     <title>{title}</title>
     <script is:inline>
       (function () {
@@ -34,7 +34,7 @@ const currentPath = Astro.url.pathname;
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="/">
-          <img src={`${import.meta.env.BASE_URL}images/logo.jpeg`} alt="汇通金融租赁标志" />
+          <img src="/ht/images/logo.jpeg" alt="汇通金融租赁标志" />
           <span>{site.name}</span>
         </a>
         <button class="nav-toggle" id="navToggle" aria-label="打开菜单">☰</button>
